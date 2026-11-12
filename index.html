@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>فاخیر هەریری — چێشتخانەی خواردنی ڕەسەنی کوردی</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;900&family=Noto+Sans+Arabic:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --img-dolma: url("https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=1000&q=85");
+      --img-kebab: url("https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1000&q=85");
+      --img-qozi: url("https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=85");
+      --img-biryani: url("https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=1000&q=85");
+      --img-grill: url("https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=1000&q=85");
+      --img-tea: url("https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=1000&q=85");
+
+      --display: "Noto Kufi Arabic", "Noto Sans Arabic", system-ui, sans-serif;
+      --sans: "Noto Sans Arabic", system-ui, -apple-system, sans-serif;
+
+      --paper: #f5f4ef;
+      --ink: #0f0f0e;
+      --card-dark: #181715;
+      --card-cream: #f9f6f1;
+      --red: #d94e34;
+      --green: #1b8a4b;
+      --yellow: #f3c952;
+      --blue: #8ecae6;
+
+      --nav-bg: #ffffff;
+      --nav-fg: #0f0f0e;
+      --nav-muted: #62615d;
+      --nav-line: rgba(15, 15, 14, 0.09);
+      --nav-rule: rgba(15, 15, 14, 0.16);
+
+      --r: 22px;
+      --gap: 14px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    a, button, input, select {
+      color: inherit;
+      text-decoration: none;
+      font: inherit;
+      background: none;
+      border: none;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* =========================================
+       VIEW SWITCHING (TWO DISTINCT PAGES)
+       ========================================= */
+    .view-page {
+      display: none;
+      animation: fadePage 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .view-page.active {
+      display: block;
+    }
+
+    @keyframes fadePage {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =========================================
+       FLOATING HEADER
+       ========================================= */
+    .hdr {
+      position: sticky;
+      top: 0;
+      margin: 0 32px;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-radius: 0 0 var(--r) var(--r);
+      box-shadow: 0 0 0 1px var(--nav-line), 0 18px 40px -20px rgba(15, 15, 14, 0.22);
+    }
+
+    .util {
+      height: 42px;
+      border-bottom: 1px solid var(--nav-line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      font-size: 12px;
+    }
+
+    .phones {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .ph-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: var(--ink);
+      transition: opacity 0.2s;
+    }
+    .ph-link:hover { opacity: 0.7; }
+    .ph-link svg {
+      width: 15px;
+      height: 15px;
+      color: var(--red);
+      flex-shrink: 0;
+    }
+
+    .u-rule {
+      width: 1px;
+      height: 18px;
+      background: var(--nav-rule);
+    }
+
+    .unav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .unav a {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--nav-muted);
+      transition: color 0.2s;
+    }
+    .unav a:hover { color: var(--ink); }
+
+    .main-row {
+      height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      cursor: pointer;
+    }
+
+    .brand-title {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 27px;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--nav-muted);
+    }
+
+    .mnav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .mnav-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+    .mnav-item:hover { color: var(--red); }
+
+    .circle-arr {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .m-sep {
+      width: 1px;
+      height: 20px;
+      background: var(--nav-rule);
+    }
+
+    .menu-btn {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 12px;
+      background: var(--paper);
+    }
+
+    .burger {
+      width: 18px;
+      height: 12px;
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .burger span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+
+    .hdr[data-open="true"] .burger span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+    .hdr[data-open="true"] .burger span:nth-child(2) { opacity: 0; }
+    .hdr[data-open="true"] .burger span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+
+    .pill-btn {
+      height: 52px;
+      padding: 0 24px;
+      border-radius: 18px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .pill-btn:hover {
+      background: var(--red);
+      transform: translateY(-2px);
+    }
+
+    /* Mobile Dropdown Menu */
+    .menu-panel {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+      padding: 18px 24px 24px;
+      border-top: 1px solid var(--nav-line);
+      background: var(--nav-bg);
+      border-radius: 0 0 var(--r) var(--r);
+    }
+    .hdr[data-open="true"] .menu-panel {
+      display: flex;
+    }
+    .mp-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .mp-links a {
+      font-size: 16px;
+      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: var(--paper);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .mp-phones {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      padding-top: 10px;
+      border-top: 1px solid var(--nav-line);
+      color: var(--nav-muted);
+    }
+
+    /* =========================================
+       HERO + MOSAIC SECTION (PAGE 1)
+       ========================================= */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 640px;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 40px 48px 60px;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 22px;
+      z-index: 10;
+      max-width: 560px;
+    }
+
+    .badge-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border: 1px solid var(--nav-line);
+      padding: 7px 16px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--red);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .hero h1 {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: clamp(38px, 4.6vw, 66px);
+      line-height: 1.2;
+      color: var(--ink);
+    }
+
+    .hero h1 span { display: block; }
+    .hero h1 .highlight { color: var(--red); }
+
+    .hero p {
+      font-size: clamp(16px, 1.3vw, 18.5px);
+      line-height: 1.8;
+      color: #383734;
+      font-weight: 500;
+    }
+
+    .hero p strong { color: var(--ink); font-weight: 800; }
+
+    .acts {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-top: 6px;
+    }
+
+    .inst-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15.5px;
+      font-weight: 800;
+      padding: 12px 18px;
+      border-radius: 16px;
+      background: rgba(15, 15, 14, 0.06);
+      transition: background 0.2s;
+    }
+    .inst-link:hover { background: rgba(15, 15, 14, 0.12); }
+
+    .inst-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* MOSAIC FOOD COLUMNS (CLICKABLE) */
+    .mosaic-wrap {
+      position: relative;
+      height: 680px;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 26px;
+      direction: ltr;
+    }
+
+    .mosaic {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap);
+      height: 100%;
+      width: 100%;
+    }
+
+    .col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+      will-change: transform;
+      animation: colDown 22s linear infinite;
+    }
+
+    .col.c2 { animation-name: colUp; }
+    .mosaic-wrap:hover .col { animation-play-state: paused; }
+
+    @keyframes colDown {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(0, -50%, 0); }
+    }
+    @keyframes colUp {
+      0% { transform: translate3d(0, -50%, 0); }
+      100% { transform: translate3d(0, 0, 0); }
+    }
+
+    .cell {
+      width: 100%;
+      height: 250px;
+      border-radius: var(--r);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 10px 24px -12px rgba(0,0,0,0.18);
+    }
+
+    .cell.ph {
+      cursor: pointer;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: transform 0.25s;
+    }
+    .cell.ph:hover { transform: scale(0.98); }
+    .cell.ph::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%);
+      pointer-events: none;
+    }
+
+    .cell.solid {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      direction: rtl;
+    }
+    .cell.red { background-color: var(--red); color: #fff; }
+    .cell.yellow { background-color: var(--yellow); color: var(--ink); }
+    .cell.blue { background-color: var(--blue); color: var(--ink); }
+    .cell.cream { background-color: var(--card-cream); color: var(--ink); border: 1px solid #e5e0d5; }
+    .cell.dark { background-color: var(--card-dark); color: #fff; }
+
+    .solid-top { font-size: 12px; font-weight: 700; opacity: 0.85; }
+    .solid-title { font-family: var(--display); font-size: 18px; font-weight: 900; line-height: 1.4; }
+    .solid-sub { font-size: 12.5px; font-weight: 600; opacity: 0.9; }
+
+    .cell.f-dolma { background-image: var(--img-dolma); }
+    .cell.f-kebab { background-image: var(--img-kebab); }
+    .cell.f-qozi { background-image: var(--img-qozi); }
+    .cell.f-biryani { background-image: var(--img-biryani); }
+    .cell.f-grill { background-image: var(--img-grill); }
+    .cell.f-tea { background-image: var(--img-tea); }
+
+    .cell-macro-pill {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      background: rgba(15, 15, 14, 0.78);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      direction: rtl;
+    }
+
+    .dish-info {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      left: 14px;
+      z-index: 2;
+      direction: rtl;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      color: #fff;
+    }
+
+    .dish-name { font-family: var(--display); font-size: 14.5px; font-weight: 800; text-shadow: 0 2px 6px rgba(0,0,0,0.5); }
+    .dish-price { font-size: 12px; font-weight: 700; color: var(--yellow); }
+
+    /* MENU GRID SECTION */
+    .section-wrap { max-width: 1440px; margin: 0 auto; padding: 70px 48px; }
+    .sec-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 40px; text-align: right; }
+    .sec-tag { display: inline-block; font-size: 13px; font-weight: 800; color: var(--red); }
+    .sec-head h2 { font-family: var(--display); font-size: clamp(28px, 3.5vw, 42px); font-weight: 900; color: var(--ink); }
+    .sec-head p { font-size: 16px; color: var(--nav-muted); max-width: 680px; }
+
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 26px;
+    }
+
+    .food-card {
+      background: #fff;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--nav-line);
+      box-shadow: 0 12px 28px -16px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .food-card:hover { transform: translateY(-6px); box-shadow: 0 20px 38px -16px rgba(0,0,0,0.18); }
+
+    .food-img { height: 220px; background-size: cover; background-position: center; position: relative; }
+    .food-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(15, 15, 14, 0.82);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 99px;
+    }
+
+    .food-body { padding: 22px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .food-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .food-top h3 { font-family: var(--display); font-size: 19px; font-weight: 900; color: var(--ink); }
+    .food-price { font-weight: 900; color: var(--red); font-size: 16px; white-space: nowrap; }
+    .food-desc { font-size: 14px; color: var(--nav-muted); line-height: 1.65; }
+
+    .macro-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding-top: 10px;
+      border-top: 1px dashed var(--nav-line);
+      margin-top: auto;
+    }
+
+    .macro-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12.5px;
+      font-weight: 800;
+      padding: 5px 11px;
+      border-radius: 10px;
+      background: var(--paper);
+    }
+    .macro-pill.cal { background: #fff3ef; color: var(--red); }
+    .macro-pill.pro { background: #eef8f2; color: var(--green); }
+
+    .card-open-btn {
+      margin-top: 6px;
+      width: 100%;
+      padding: 11px 16px;
+      border-radius: 14px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.2s;
+    }
+    .food-card:hover .card-open-btn { background: var(--red); }
+
+    /* =========================================
+       PAGE 2: DEDICATED DISH DETAIL PAGE (#dishView)
+       ========================================= */
+    .detail-container { max-width: 1320px; margin: 0 auto; padding: 36px 48px 80px; }
+    .detail-nav-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 14px; }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      border: 1px solid var(--nav-line);
+      padding: 12px 22px;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 800;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .back-btn:hover { background: var(--ink); color: #fff; transform: translateX(4px); }
+
+    .breadcrumb { font-size: 14px; font-weight: 700; color: var(--nav-muted); }
+    .breadcrumb strong { color: var(--ink); }
+
+    .detail-hero-grid {
+      display: grid;
+      grid-template-columns: 520px 1fr;
+      gap: 44px;
+      background: #fff;
+      border-radius: 32px;
+      padding: 32px;
+      border: 1px solid var(--nav-line);
+      box-shadow: 0 22px 48px -24px rgba(15, 15, 14, 0.14);
+      align-items: start;
+    }
+
+    .detail-photo-box {
+      position: relative;
+      height: 480px;
+      border-radius: 24px;
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+      box-shadow: 0 14px 32px -12px rgba(0,0,0,0.22);
+    }
+
+    .detail-photo-badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: rgba(15, 15, 14, 0.85);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 7px 16px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .detail-info-col { display: flex; flex-direction: column; gap: 24px; }
+    .detail-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--nav-line);
+      padding-bottom: 18px;
+    }
+    .detail-title-row h1 { font-family: var(--display); font-size: clamp(26px, 3.2vw, 38px); font-weight: 900; color: var(--ink); line-height: 1.25; }
+    .detail-price-tag { background: #fff3ef; color: var(--red); font-family: var(--display); font-size: 22px; font-weight: 900; padding: 8px 18px; border-radius: 16px; white-space: nowrap; }
+    .detail-story { font-size: 16.5px; line-height: 1.85; color: #383734; font-weight: 500; }
+
+    /* NUTRITION & MACROS PANEL */
+    .nutrition-box { background: var(--paper); border: 1px solid #e4e1d8; border-radius: 24px; padding: 22px; }
+    .nutrition-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+    .nutrition-hdr h3 { font-family: var(--display); font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+    .portion-tag { font-size: 12.5px; font-weight: 700; color: var(--nav-muted); background: #fff; padding: 4px 12px; border-radius: 99px; border: 1px solid var(--nav-line); }
+
+    .macro-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .macro-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 16px 14px;
+      border: 1px solid var(--nav-line);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .macro-card.highlight-cal { border-color: rgba(217, 78, 52, 0.35); background: linear-gradient(180deg, #fff9f7 0%, #ffffff 100%); }
+    .macro-card.highlight-pro { border-color: rgba(27, 138, 75, 0.35); background: linear-gradient(180deg, #f4fbf7 0%, #ffffff 100%); }
+
+    .macro-label { font-size: 12.5px; font-weight: 700; color: var(--nav-muted); }
+    .macro-val { font-family: var(--display); font-size: 24px; font-weight: 900; color: var(--ink); }
+    .macro-card.highlight-cal .macro-val { color: var(--red); }
+    .macro-card.highlight-pro .macro-val { color: var(--green); }
+    .macro-unit { font-size: 12px; font-weight: 700; color: var(--nav-muted); }
+
+    .macro-bar { width: 100%; height: 6px; background: #eceae4; border-radius: 99px; overflow: hidden; margin-top: 4px; }
+    .macro-bar-fill { height: 100%; border-radius: 99px; }
+
+    .detail-sub-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; }
+    .sub-panel { background: var(--paper); border-radius: 20px; padding: 18px 20px; border: 1px solid var(--nav-line); }
+    .sub-panel h4 { font-family: var(--display); font-size: 15px; font-weight: 900; margin-bottom: 12px; color: var(--ink); }
+    .ing-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ing-tag { background: #fff; border: 1px solid var(--nav-line); padding: 6px 12px; border-radius: 10px; font-size: 13px; font-weight: 700; }
+    .meta-list { display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; font-weight: 600; }
+
+    .detail-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding-top: 8px; }
+    .order-now-btn {
+      flex: 1;
+      min-width: 220px;
+      height: 56px;
+      border-radius: 18px;
+      background: var(--red);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .order-now-btn:hover { opacity: 0.92; transform: translateY(-2px); }
+
+    .other-dishes-sec { margin-top: 56px; }
+    .other-dishes-sec h3 { font-family: var(--display); font-size: 24px; font-weight: 900; margin-bottom: 22px; }
+
+    /* RESERVATION & BRANCHES SECTION */
+    .info-band { background: var(--card-dark); color: #fff; border-radius: 32px; margin: 20px 32px 60px; padding: 56px 48px; }
+    .info-grid { max-width: 1360px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .info-text h2 { font-family: var(--display); font-size: clamp(26px, 3vw, 38px); font-weight: 900; margin-bottom: 16px; color: var(--yellow); }
+    .info-text p { font-size: 16px; line-height: 1.8; color: #d6d4ce; margin-bottom: 24px; }
+    .info-list { display: flex; flex-direction: column; gap: 14px; font-size: 15px; }
+    .info-item { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.06); padding: 14px 18px; border-radius: 16px; }
+
+    .reserve-box { background: #fff; color: var(--ink); padding: 32px; border-radius: 24px; }
+    .reserve-box h3 { font-family: var(--display); font-size: 22px; font-weight: 900; margin-bottom: 18px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: 13px; font-weight: 700; color: var(--nav-muted); }
+    .field input, .field select { height: 46px; padding: 0 14px; border-radius: 12px; background: var(--paper); border: 1px solid var(--nav-line); font-size: 14px; font-weight: 600; }
+
+    .submit-btn { margin-top: 16px; width: 100%; height: 52px; border-radius: 14px; background: var(--red); color: #fff; font-size: 16px; font-weight: 800; transition: opacity 0.2s; }
+    .submit-btn:hover { opacity: 0.9; }
+
+    .footer { border-top: 1px solid var(--nav-line); padding: 36px 48px; text-align: center; font-size: 14px; color: var(--nav-muted); font-weight: 600; }
+
+    @media (max-width: 1120px) {
+      .hdr { margin: 0 16px; }
+      .util, .mnav .mnav-item, .mnav .m-sep { display: none; }
+      .menu-btn { display: inline-flex; }
+      .main-row { height: 74px; padding: 0 20px; }
+      .main-grid { grid-template-columns: 1fr; padding: 32px 20px 40px; gap: 32px; }
+      .mosaic-wrap { height: 500px; }
+      .section-wrap { padding: 48px 20px; }
+      .detail-container { padding: 24px 20px 60px; }
+      .detail-hero-grid { grid-template-columns: 1fr; padding: 22px; gap: 28px; }
+      .detail-photo-box { height: 340px; }
+      .macro-grid { grid-template-columns: repeat(2, 1fr); }
+      .detail-sub-grid { grid-template-columns: 1fr; }
+      .info-band { margin: 10px 16px 40px; padding: 36px 24px; }
+      .info-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 600px) {
+      .hdr { margin: 0 10px; }
+      .brand-title { font-size: 21px; }
+      .main-grid { padding: 24px 14px 32px; }
+      .hero h1 { font-size: 32px; }
+      .mosaic-wrap { height: 420px; }
+      .cell { height: 175px; border-radius: 16px; }
+      .detail-photo-box { height: 260px; }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- STICKY HEADER -->
+  <header class="hdr" id="hdr">
+    <div class="util">
+      <div class="phones">
+        <a href="tel:+9647508386000" class="ph-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span>لقی سەرەکی هەولێر : ٠٧٥٠ ٨٣٨ ٦٠٠٠</span>
+        </a>
+        <span class="u-rule"></span>
+        <a href="tel:+9647508386001" class="ph-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span>بەشی میوانداری و بۆنەکان : ٠٧٥٠ ٨٣٨ ٦٠٠١</span>
+        </a>
+      </div>
+
+      <nav class="unav" aria-label="بەستەرە خێراکان">
+        <a href="#menu-section" data-home-scroll="menu-section">لیستی خواردن و کالۆری</a>
+        <a href="#dish/qozi">قۆزی بەرخ</a>
+        <a href="#dish/kebab">کەبابی هەریر</a>
+        <a href="#reserve-section" data-home-scroll="reserve-section">ناونیشان</a>
+      </nav>
+    </div>
+
+    <div class="main-row">
+      <a href="#home" class="brand" id="brandHome">
+        <span class="brand-title">فاخیر هەریری</span>
+        <span class="brand-sub">ئەرشیفێک لە تامی ڕەسەنی کوردی لەسەر ئاگردان</span>
+      </a>
+
+      <nav class="mnav" aria-label="ڕێنیشاندەری سەرەکی">
+        <a href="#menu-section" data-home-scroll="menu-section" class="mnav-item">
+          <span>لیستی خواردنەکان</span>
+          <span class="circle-arr">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </span>
+        </a>
+        <span class="m-sep"></span>
+        <a href="#dish/qozi" class="mnav-item">قۆزی هەریر</a>
+        <a href="#dish/dolma" class="mnav-item">دۆڵمەی هەولێری</a>
+        <a href="#reserve-section" data-home-scroll="reserve-section" class="mnav-item">گرتنی مێز</a>
+        <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false">
+          <span class="burger"><span></span><span></span><span></span></span>
+          <span>لیست</span>
+        </button>
+      </nav>
+
+      <div class="hdr-cta">
+        <a href="#reserve-section" data-home-scroll="reserve-section" class="pill-btn">گرتنی مێز</a>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div class="menu-panel" id="menuPanel">
+      <div class="mp-links">
+        <a href="#home"><span>پەڕەی سەرەکی</span><span>←</span></a>
+        <a href="#menu-section" data-home-scroll="menu-section"><span>لیستی خواردنەکان و کالۆری</span><span>↓</span></a>
+        <a href="#dish/qozi"><span>قۆزی گۆشتی بەرخی هەریر</span><span>←</span></a>
+        <a href="#dish/dolma"><span>دۆڵمەی ڕەسەنی هەولێری</span><span>←</span></a>
+        <a href="#reserve-section" data-home-scroll="reserve-section"><span>گرتنی مێز و ناونیشان</span><span>↓</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================
+       PAGE 1: HOME VIEW (#homeView)
+       =================================================== -->
+  <div id="homeView" class="view-page active">
+    <div class="main-grid">
+      <main class="hero">
+        <div class="badge-top">
+          <span>🔥 تامی ڕەسەنی دەشتی هەریر و هەولێر</span>
+        </div>
+        <h1>
+          <span>ئەرشیفێک</span>
+          <span>لە تامی <span class="highlight">ڕەسەنی</span></span>
+          <span>کوردەواری</span>
+        </h1>
+        <p>
+          چێشتخانەی <strong>فاخیر هەریری</strong> تامە ڕەسەنە کۆنەکان زیندوو دەکاتەوە وەک خوانی شاهانە لە سەرتاسەری کوردستانەوە. کلیک لەسەر هەر خواردنێک بکە بۆ چوونە ناو **پەڕەی دووەم** و بینینی وردەکاری، پێکهاتەکان، و بڕی کالۆری و پڕۆتین.
+        </p>
+        <div class="acts">
+          <a href="#menu-section" data-home-scroll="menu-section" class="pill-btn">بینینی لیستی خواردن و کالۆری ↓</a>
+        </div>
+      </main>
+
+      <!-- MOSAIC FOOD CARDS -->
+      <div class="mosaic-wrap">
+        <div class="mosaic">
+          <div class="col c1">
+            <div class="cell solid red">
+              <span class="solid-top">تایبەتی فاخیر هەریری</span>
+              <div class="solid-title">کلیک لەسەر هەر وێنەیەک بکە بۆ کردنەوەی پەڕەی وردەکاری</div>
+              <span class="solid-sub">١٠٠٪ گۆشتی بەرخی تازە</span>
+            </div>
+            <div class="cell ph f-dolma" data-dish="dolma">
+              <span class="cell-macro-pill">🔥 ٦٤٠ کالۆری | 💪 ٢٨گم پڕۆتین</span>
+              <div class="dish-info">
+                <span class="dish-name">دۆڵمەی ڕەسەنی هەولێری</span>
+                <span class="dish-price">١٥,٠٠٠ دینار — کلیک بکە</span>
+              </div>
+            </div>
+            <div class="cell ph f-qozi" data-dish="qozi">
+              <span class="cell-macro-pill">🔥 ٨٩٠ کالۆری | 💪 ٥٤گم پڕۆتین</span>
+              <div class="dish-info">
+                <span class="dish-name">قۆزی شامی و گۆشتی بەرخ</span>
+                <span class="dish-price">٢٢,٠٠٠ دینار — کلیک بکە</span>
+              </div>
+            </div>
+          </div>
+          <div class="col c2">
+            <div class="cell ph f-biryani" data-dish="biryani">
+              <span class="cell-macro-pill">🔥 ٧٨٠ کالۆری | 💪 ٤٢گم پڕۆتین</span>
+              <div class="dish-info">
+                <span class="dish-name">بریانی کوردەواری بە بادەم</span>
+                <span class="dish-price">١٦,٠٠٠ دینار — کلیک بکە</span>
+              </div>
+            </div>
+            <div class="cell solid yellow">
+              <span class="solid-top">بەهای خۆراکی</span>
+              <div class="solid-title">زانیاری تەواوی ماکرۆکان بۆ هەر ژەمێک</div>
+              <span class="solid-sub">بۆ تەندروستی و وەرزشوانان</span>
+            </div>
+            <div class="cell ph f-kebab" data-dish="kebab">
+              <span class="cell-macro-pill">🔥 ٦١٠ کالۆری | 💪 ٤٦گم پڕۆتین</span>
+              <div class="dish-info">
+                <span class="dish-name">کەبابی سەر خەڵووزی هەریر</span>
+                <span class="dish-price">١٤,٠٠٠ دینار — کلیک بکە</span>
+              </div>
+            </div>
+          </div>
+          <div class="col c3">
+            <div class="cell ph f-qozi" data-dish="qozi">
+              <span class="cell-macro-pill">🔥 ٨٩٠ کالۆری | 💪 ٥٤گم پڕۆتین</span>
+              <div class="dish-info">
+                <span class="dish-name">شانەی بەرخی هەریر</span>
+                <span class="dish-price">٢٢,٠٠٠ دینار — کلیک بکە</span>
+              </div>
+            </div>
+            <div class="cell ph f-grill" data-dish="sini">
+              <span class="cell-macro-pill">🔥 ٩٢٠ کالۆری | 💪 ٦٨گم پڕۆتین</span>
+              <div class="dish-info">
+                <span class="dish-name">سینی برژاوی تێکەڵ (٤ کەسی)</span>
+                <span class="dish-price">٤٨,٠٠٠ دینار — کلیک بکە</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MENU SECTION -->
+    <section class="section-wrap" id="menu-section">
+      <div class="sec-head">
+        <span class="sec-tag">کلیک لەسەر کارتەکان بکە بۆ چوونە ناو پەڕەی دووەم</span>
+        <h2>لیستی خواردنەکانی فاخیر هەریری</h2>
+        <p>هەر خواردنێک هەڵبژێریت، پەڕەیەکی تایبەت بە خۆی دەکرێتەوە کە تێیدا بڕی کالۆری، پڕۆتین، کاربۆهیدرات، چەوری و پێکهاتەکان پیشان دەدات.</p>
+      </div>
+
+      <div class="food-grid" id="homeFoodGrid"></div>
+    </section>
+
+    <!-- RESERVATION & LOCATION -->
+    <section class="info-band" id="reserve-section">
+      <div class="info-grid">
+        <div class="info-text">
+          <h2>سەردانمان بکەن یان مێزەکەتان پێشوەختە بگرن</h2>
+          <p>لە چێشتخانەی فاخیر هەریری بە خۆشحاڵییەوە پێشوازیتان لێ دەکەین. شوێنی فراوان و تایبەتمان هەیە بۆ خێزان و میوانداری.</p>
+          <div class="info-list">
+            <div class="info-item">📍 <strong>ناونیشان:</strong> هەولێر — جادەی سەرەکی کەسنەزان</div>
+            <div class="info-item">⏰ <strong>کاتی کارکردن:</strong> ١١:٠٠ی بەیانی تا ١٢:٠٠ی شەو</div>
+            <div class="info-item">📞 <strong>تەلەفۆن:</strong> ٠٧٥٠ ٨٣٨ ٦٠٠٠</div>
+          </div>
+        </div>
+
+        <form class="reserve-box" id="reserveForm">
+          <h3>فۆڕمی گرتنی مێز</h3>
+          <div class="form-grid">
+            <div class="field">
+              <label>ناوی بەڕێزتان</label>
+              <input type="text" placeholder="بۆ نموونە: ئارام محەمەد" required>
+            </div>
+            <div class="field">
+              <label>ژمارەی مۆبایل</label>
+              <input type="tel" placeholder="0750 XXX XXXX" required>
+            </div>
+            <div class="field">
+              <label>ژمارەی میوانەکان</label>
+              <select><option>٢ کەس</option><option>٤ کەس (خێزانی)</option><option>٦ بۆ ٨ کەس</option></select>
+            </div>
+            <div class="field">
+              <label>کاتژمێری هاتن</label>
+              <select><option>١:٠٠ی نیوەڕۆ</option><option>٧:٠٠ی ئێوارە</option><option>٨:٣٠ی شەو</option></select>
+            </div>
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn">تۆمارکردنی داواکاری مێز</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===================================================
+       PAGE 2: DEDICATED DISH DETAIL VIEW (#dishView)
+       =================================================== -->
+  <div id="dishView" class="view-page">
+    <div class="detail-container">
+      <div class="detail-nav-bar">
+        <button type="button" class="back-btn" id="backToMenuBtn">
+          <span>→</span>
+          <span>گەڕانەوە بۆ پەڕەی سەرەکی و مێنوو</span>
+        </button>
+        <div class="breadcrumb">
+          <a href="#home">سەرەتا</a> / <strong>پەڕەی وردەکاری خواردن</strong>
+        </div>
+      </div>
+
+      <div class="detail-hero-grid">
+        <div class="detail-photo-box" id="dtImage">
+          <span class="detail-photo-badge" id="dtBadge">پڕفرۆشترین</span>
+        </div>
+
+        <div class="detail-info-col">
+          <div class="detail-title-row">
+            <h1 id="dtTitle">خواردن</h1>
+            <span class="detail-price-tag" id="dtPrice">٠ د.ع</span>
+          </div>
+
+          <p class="detail-story" id="dtDesc"></p>
+
+          <!-- NUTRITION & MACROS PANEL -->
+          <div class="nutrition-box">
+            <div class="nutrition-hdr">
+              <h3>📊 بەهای خۆراکی و ماکرۆکان (بۆ هەر ژەمێک)</h3>
+              <span class="portion-tag" id="dtPortion">قەبارەی ژەم: ٥٥٠ گرام</span>
+            </div>
+
+            <div class="macro-grid">
+              <div class="macro-card highlight-cal">
+                <span class="macro-label">🔥 وزە (کالۆری)</span>
+                <div>
+                  <span class="macro-val" id="dtCalories">٠</span>
+                  <span class="macro-unit">کالۆری</span>
+                </div>
+                <div class="macro-bar"><div class="macro-bar-fill" id="barCal" style="width: 50%; background: var(--red);"></div></div>
+              </div>
+
+              <div class="macro-card highlight-pro">
+                <span class="macro-label">💪 پڕۆتین (Protein)</span>
+                <div>
+                  <span class="macro-val" id="dtProtein">٠</span>
+                  <span class="macro-unit">گرام</span>
+                </div>
+                <div class="macro-bar"><div class="macro-bar-fill" id="barPro" style="width: 50%; background: var(--green);"></div></div>
+              </div>
+
+              <div class="macro-card">
+                <span class="macro-label">🌾 کاربۆهیدرات</span>
+                <div>
+                  <span class="macro-val" id="dtCarbs">٠</span>
+                  <span class="macro-unit">گرام</span>
+                </div>
+                <div class="macro-bar"><div class="macro-bar-fill" id="barCarb" style="width: 50%; background: #d99b26;"></div></div>
+              </div>
+
+              <div class="macro-card">
+                <span class="macro-label">🥑 چەوری (Fats)</span>
+                <div>
+                  <span class="macro-val" id="dtFats">٠</span>
+                  <span class="macro-unit">گرام</span>
+                </div>
+                <div class="macro-bar"><div class="macro-bar-fill" id="barFat" style="width: 50%; background: #4a7c9b;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- INGREDIENTS & META DETAILS -->
+          <div class="detail-sub-grid">
+            <div class="sub-panel">
+              <h4>🥘 پێکهاتە سەرەکییەکان</h4>
+              <div class="ing-tags" id="dtIngredients"></div>
+            </div>
+            <div class="sub-panel">
+              <h4>⏱️ زانیاری ئامادەکردن</h4>
+              <div class="meta-list" id="dtMeta"></div>
+            </div>
+          </div>
+
+          <div class="detail-actions">
+            <a href="tel:+9647508386000" class="order-now-btn">
+              <span>📞 داواکردنی ئەم ژەمە بە گەیاندن (٠٧٥٠ ٨٣٨ ٦٠٠٠)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="other-dishes-sec">
+        <h3>خواردنەکانی تریش ببینە</h3>
+        <div class="food-grid" id="relatedFoodGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    © ٢٠٢٦ چێشتخانەی فاخیر هەریری — هەموو مافێکی پارێزراوە | هەولێر، هەرێمی کوردستان
+  </footer>
+
+  <script>
+    (function() {
+      var DISHES = {
+        qozi: {
+          id: "qozi",
+          title: "قۆزی گۆشتی بەرخی هەریر",
+          badge: "پڕفرۆشترین",
+          price: "٢٢,٠٠٠ د.ع",
+          image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=85",
+          shortDesc: "گۆشتی شان و ملی بەرخی خۆماڵی کوڵاو، لەگەڵ برنجی کوردی و شلەی قەیسی.",
+          fullDesc: "قۆزی فاخیر هەریری بە گۆشتی بەرخی تازەی دەشتی هەریر ئامادە دەکرێت کە بۆ ماوەی ٤ کاتژمێر لەسەر ئاگرێکی هێواش بە بەهاراتی تایبەت دەکوڵێت تا نەرم دەبێتەوە. لەگەڵ برنجی کوردیی ئاکرێ و بادەم و کشمیش پێشکەش دەکرێت.",
+          portion: "٦٠٠ گرام",
+          calories: "٨٩٠", protein: "٥٤", carbs: "٦٨", fats: "٤٢",
+          calPct: 78, proPct: 90, carbPct: 65, fatPct: 58,
+          ingredients: ["٣٠٠ گرام گۆشتی شانی بەرخ", "برنجی کوردی ئاکرێ", "ڕۆنی کوردی", "بادەم و کشمیش", "شلەی قەیسی"],
+          meta: ["🔥 شێوازی لێنان: کوڵاندنی هێواش", "💪 دەوڵەمەند بە پڕۆتین", "🥗 هاوپێچ: ماستاو و سەوزە"]
+        },
+        dolma: {
+          id: "dolma",
+          title: "دۆڵمەی ڕەسەنی هەولێری",
+          badge: "تایبەتی ڕۆژانە",
+          price: "١٥,٠٠٠ د.ع",
+          image: "https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=1000&q=85",
+          shortDesc: "گەڵامێو، سڵق، پیاز و پەراسووی بەرخ بە ترشی سماق و ڕۆنی کوردی.",
+          fullDesc: "دۆڵمەی هەولێری ڕۆژانە بە دەستی خانمانی شارەزا دەپێچرێتەوە. لە بنی مەنجەڵەکەدا پەراسووی بەرخی تێدایە لەگەڵ گەڵامێوی ناسک، کە بە ئاوی سماقی سروشتی دەکوڵێنرێت.",
+          portion: "٥٠٠ گرام",
+          calories: "٦٤٠", protein: "٢٨", carbs: "٧٢", fats: "٢٦",
+          calPct: 58, proPct: 55, carbPct: 70, fatPct: 40,
+          ingredients: ["گۆشتی قیمەکراوی بەرخ", "گەڵامێو و سڵق", "برنجی کوردی", "ئاوی سماق", "ڕۆنی کوردی"],
+          meta: ["🔥 شێوازی لێنان: کوڵاندن بە ئاوی سماق", "🌿 تامی ترش و خۆش", "🥗 هاوپێچ: دۆی خۆماڵی"]
+        },
+        kebab: {
+          id: "kebab",
+          title: "کەبابی سەر خەڵووزی هەریر",
+          badge: "سەر خەڵووز",
+          price: "١٤,٠٠٠ د.ع",
+          image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1000&q=85",
+          shortDesc: "کەبابی گۆشتی بەرخ لەسەر خەڵووزی بەڕوو لەگەڵ تەماتە و پیاز و سماق.",
+          fullDesc: "کەبابی فاخیر هەریری تەنها لە گۆشتی بەرخی خۆماڵی ئامادە دەکرێت و لەسەر خەڵووزی دار بەڕوو دەبرژێنرێت تا تامێکی دووکەڵاوی نایاب بەدەست بهێنێت.",
+          portion: "٣٢٠ گرام",
+          calories: "٦١٠", protein: "٤٦", carbs: "١٨", fats: "٣٨",
+          calPct: 55, proPct: 82, carbPct: 22, fatPct: 52,
+          ingredients: ["٢٥٠ گرام گۆشتی بەرخ", "تەماتەی برژاو", "پیاز و سماق", "نانی تەندووری گەرم"],
+          meta: ["🔥 شێوازی لێنان: خەڵووزی بەڕوو", "💪 پڕۆتینی زۆر بەرز", "🥗 هاوپێچ: سەوزەی تازە"]
+        },
+        biryani: {
+          id: "biryani",
+          title: "بریانی کوردەواری بە بادەم",
+          badge: "خوانی شاهانە",
+          price: "١٦,٠٠٠ د.ع",
+          image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=1000&q=85",
+          shortDesc: "بریانی بەهاراتی ڕەسەن بە گۆشتی بەرخ، بادەم، کشمیش و پەتاتە.",
+          fullDesc: "بریانی کوردی بە تێکەڵەی حەوت بەهاراتی تایبەت لێدەنرێت. برنجی دەنک درێژ لەگەڵ گۆشتی نەرم، پەتاتەی سوورەکراو، نۆک، کشمیش و بادەم ڕازاوەتەوە.",
+          portion: "٥٥٠ گرام",
+          calories: "٧٨٠", protein: "٤٢", carbs: "٨٤", fats: "٣٠",
+          calPct: 70, proPct: 75, carbPct: 80, fatPct: 45,
+          ingredients: ["برنجی بەسمەتی", "گۆشتی بەرخ", "بادەم و کشمیش", "پەتاتە و نۆک"],
+          meta: ["🔥 شێوازی لێنان: دمکێشان", "⚡ وزەبەخش و بەتام", "🥗 هاوپێچ: شلەی فاسۆلیا"]
+        },
+        sini: {
+          id: "sini",
+          title: "سینی شاهانەی فاخیر هەریری",
+          badge: "بۆ ٤ کەس",
+          price: "٤٨,٠٠٠ د.ع",
+          image: "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=1000&q=85",
+          shortDesc: "سینی گەورەی قۆزی، کەباب، تکەی گۆشت و بریانی بۆ خێزان.",
+          fullDesc: "سینی شاهانەی فاخیر هەریری گەورەترین خوانی خێزانییە کە لەسەر برنجی کوردی و بریانی، شانی بەرخ، کەباب و تکە پێشکەش دەکرێت.",
+          portion: "بەشی ١ کەس (٦٥٠ گرام)",
+          calories: "٩٢٠", protein: "٦٨", carbs: "٦٤", fats: "٤٤",
+          calPct: 85, proPct: 98, carbPct: 62, fatPct: 60,
+          ingredients: ["قۆزی شانی بەرخ", "کەبابی خەڵووز", "تکەی گۆشت", "برنج و بریانی"],
+          meta: ["👨‍👩‍👧‍👦 گونجاو بۆ خێزان", "💪 پڕۆتینی باڵا", "🍵 دیاری: چای سەماوەر"]
+        },
+        tea: {
+          id: "tea",
+          title: "چای سەماوەر و کولیچە",
+          badge: "پاش خوان",
+          price: "دیاری خوان",
+          image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=1000&q=85",
+          shortDesc: "چای ڕەشی سەماوەر بە هێل لەگەڵ کولیچەی خورما و گوێز.",
+          fullDesc: "پاش تەواوکردنی ژەمەکەت، چای ڕەشی سەماوەر کە بە هێل لەسەر خەڵووز دەمکراوە لەگەڵ کولیچەی گەرم بە بێبەرامبەر پێشکەش دەکرێت.",
+          portion: "٩٠ گرام",
+          calories: "٣٢٠", protein: "٦", carbs: "٤٥", fats: "١٣",
+          calPct: 30, proPct: 15, carbPct: 45, fatPct: 25,
+          ingredients: ["چای ڕەش", "دەنکە هێل", "کولیچەی خورما و گوێز"],
+          meta: ["🔥 سەماوەری خەڵووز", "🎁 بێبەرامبەر", "🌿 یارمەتی هەرس دەدات"]
+        }
+      };
+
+      // Render cards helper
+      function createFoodCardHTML(dish) {
+        return (
+          '<article class="food-card" data-dish="' + dish.id + '" tabindex="0">' +
+            '<div class="food-img" style="background-image: url(' + dish.image + ');">' +
+              '<span class="food-badge">' + dish.badge + '</span>' +
+            '</div>' +
+            '<div class="food-body">' +
+              '<div class="food-top">' +
+                '<h3>' + dish.title + '</h3>' +
+                '<span class="food-price">' + dish.price + '</span>' +
+              '</div>' +
+              '<p class="food-desc">' + dish.shortDesc + '</p>' +
+              '<div class="macro-strip">' +
+                '<span class="macro-pill cal">🔥 ' + dish.calories + ' کالۆری</span>' +
+                '<span class="macro-pill pro">💪 ' + dish.protein + 'گم پڕۆتین</span>' +
+              '</div>' +
+              '<div class="card-open-btn"><span>بینینی وردەکاری و کالۆری</span><span>←</span></div>' +
+            '</div>' +
+          '</article>'
+        );
+      }
+
+      var homeFoodGrid = document.getElementById('homeFoodGrid');
+      var relatedFoodGrid = document.getElementById('relatedFoodGrid');
+      var allIds = Object.keys(DISHES);
+
+      homeFoodGrid.innerHTML = allIds.map(function(id) { return createFoodCardHTML(DISHES[id]); }).join('');
+
+      var homeView = document.getElementById('homeView');
+      var dishView = document.getElementById('dishView');
+
+      function renderDishDetail(id) {
+        var dish = DISHES[id];
+        if (!dish) return false;
+
+        document.getElementById('dtImage').style.backgroundImage = "url(" + dish.image + ")";
+        document.getElementById('dtBadge').textContent = dish.badge;
+        document.getElementById('dtTitle').textContent = dish.title;
+        document.getElementById('dtPrice').textContent = dish.price;
+        document.getElementById('dtDesc').textContent = dish.fullDesc;
+        document.getElementById('dtPortion').textContent = "قەبارەی ژەم: " + dish.portion;
+
+        document.getElementById('dtCalories').textContent = dish.calories;
+        document.getElementById('dtProtein').textContent = dish.protein;
+        document.getElementById('dtCarbs').textContent = dish.carbs;
+        document.getElementById('dtFats').textContent = dish.fats;
+
+        document.getElementById('barCal').style.width = dish.calPct + "%";
+        document.getElementById('barPro').style.width = dish.proPct + "%";
+        document.getElementById('barCarb').style.width = dish.carbPct + "%";
+        document.getElementById('barFat').style.width = dish.fatPct + "%";
+
+        document.getElementById('dtIngredients').innerHTML = dish.ingredients.map(function(i) {
+          return '<span class="ing-tag">✓ ' + i + '</span>';
+        }).join('');
+
+        document.getElementById('dtMeta').innerHTML = dish.meta.map(function(m) {
+          return '<div>' + m + '</div>';
+        }).join('');
+
+        var others = allIds.filter(function(k) { return k !== id; }).slice(0, 3);
+        relatedFoodGrid.innerHTML = others.map(function(k) { return createFoodCardHTML(DISHES[k]); }).join('');
+
+        homeView.classList.remove('active');
+        dishView.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return true;
+      }
+
+      function showHome(scrollToId) {
+        dishView.classList.remove('active');
+        homeView.classList.add('active');
+        if (scrollToId) {
+          setTimeout(function() {
+            var target = document.getElementById(scrollToId);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+          }, 50);
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+
+      function handleRoute() {
+        var hash = window.location.hash || '#home';
+        if (hash.indexOf('#dish/') === 0) {
+          var dishId = hash.replace('#dish/', '').trim();
+          if (!renderDishDetail(dishId)) showHome();
+        } else if (hash === '#menu-section') {
+          showHome('menu-section');
+        } else if (hash === '#reserve-section') {
+          showHome('reserve-section');
+        } else {
+          showHome();
+        }
+      }
+
+      window.addEventListener('hashchange', handleRoute);
+      handleRoute();
+
+      document.addEventListener('click', function(e) {
+        var card = e.target.closest('[data-dish]');
+        if (card) {
+          window.location.hash = '#dish/' + card.getAttribute('data-dish');
+          return;
+        }
+        var scrollLink = e.target.closest('[data-home-scroll]');
+        if (scrollLink) {
+          e.preventDefault();
+          var targetId = scrollLink.getAttribute('data-home-scroll');
+          if (window.location.hash !== '#' + targetId) {
+            window.location.hash = '#' + targetId;
+          } else {
+            showHome(targetId);
+          }
+        }
+      });
+
+      document.getElementById('backToMenuBtn').addEventListener('click', function() {
+        window.location.hash = '#menu-section';
+      });
+
+      var menuBtn = document.getElementById('menuBtn');
+      var hdr = document.getElementById('hdr');
+      menuBtn.addEventListener('click', function() {
+        var isOpen = hdr.getAttribute('data-open') === 'true';
+        hdr.setAttribute('data-open', isOpen ? 'false' : 'true');
+      });
+
+      var form = document.getElementById('reserveForm');
+      var submitBtn = document.getElementById('submitBtn');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        submitBtn.textContent = '✓ مێزەکەت بە سەرکەوتوویی تۆمار کرا!';
+        submitBtn.style.background = '#1b8a4b';
+        form.reset();
+        setTimeout(function() {
+          submitBtn.textContent = 'تۆمارکردنی داواکاری مێز';
+          submitBtn.style.background = '';
+        }, 3500);
+      });
+    })();
+  </script>
+</body>
+</html>
+<style>
+  /* إخفاء أي عنصر أو رابط يشير إلى شارة Netlify */
+  a[href*="netlify.com"],
+  iframe[src*="netlify"],
+  div[class*="netlify-badge"],
+  #netlify-badge {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+</style>
+
+<script>
+  // البحث التلقائي عن زر Powered by Netlify وحذفه فور تحميل الصفحة
+  window.addEventListener('DOMContentLoaded', () => {
+    const removeBadge = () => {
+      document.querySelectorAll('a, div, span, aside, iframe').forEach(el => {
+        if (el.textContent && el.textContent.trim() === 'Powered by Netlify') {
+          // إخفاء العنصر أو الحاوية المباشرة له إذا كانت عائمة في أسفل الشاشة
+          const target = el.closest('a, div') || el;
+          target.style.setProperty('display', 'none', 'important');
+        }
+      });
+    };
+    removeBadge();
+    setTimeout(removeBadge, 1000); // تأكيد الحذف في حال تم تحميل الشارة متأخراً
+  });
+</script>
